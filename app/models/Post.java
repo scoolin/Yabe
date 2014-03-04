@@ -37,4 +37,12 @@ public class Post extends Model {
 		return this;
 	}
 	
+	public Post next() {
+		return Post.find("created > ? order by created asc", this.created).first();
+	}
+	
+	public Post prev() {
+		return Post.find("created < ? order by created desc", this.created).first();
+	}
+	
 }
