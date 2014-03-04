@@ -8,6 +8,8 @@ GET		/posts/{id}								Application.show
 GET		/posts/{postId}/comments				Application.postComment
 POST	/posts/{postId}/comments				Application.postComment
 GET		/captcha								Application.captcha
+GET		/posts/tag/{tag}						Application.listTagged
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
