@@ -85,4 +85,11 @@ Comment(c3):
                     This post is useless ?
     created:        2009-04-05
     post:           secondBobPost    
-                 
+
+Comment(c4):
+    author:         Nobody
+    content:        >
+                    You're running Play! in DEV mode! hahahaha~ you are so funny. Goodbye man.
+                    The MVC application, no no no...
+    created:        2010-04-05
+    post:           secondBobPost                 

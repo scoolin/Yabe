@@ -5,8 +5,13 @@ import javax.persistence.*;
 
 import play.db.jpa.Model;
 
+import play.data.validation.*;
+
 @Entity
 public class Tag extends Model implements Comparable<Tag> {
+	
+	@Required
+	@MaxSize(20)
 	public String name;
 	
 	public Tag(String name) {
