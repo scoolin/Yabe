@@ -3,10 +3,14 @@ package controllers;
 import play.*;
 import play.mvc.*;
 
+import java.awt.Image;
 import java.util.*;
 
 import models.*;
+import play.cache.Cache;
 import play.data.validation.*;
+import play.libs.Codec;
+import play.libs.Images;
 
 public class Application extends Controller {
 
@@ -24,16 +28,38 @@ public class Application extends Controller {
     
     public static void show(Long id) {
     	Post post = Post.findById(id);
-    	render(post);
+    	String captchaId = Codec.UUID();
+    	render(post, captchaId);
     }
 
-    public static void postComment(Long id, @Required String author, @Required String content) {
+    public static void postComment(
+    		Long id, 
+    		@Required(message="Author is required") String author, 
+    		@Required(message="A message is required") String content,
+    		@Required(message="Please type the code") String code,
+    		String captchaId) {
+    	
     	Post post = Post.findById(id);
+    	System.out.println("post captcha: " + code);
+    	validation
+    		.equals(code, Cache.get(captchaId))
+    		.message("Invalid code. Please type it again");
+    	
     	if (validation.hasErrors()) {
     		render("Application/show.html", post);
     	}
+    	
     	post.addComment(author, content);
     	flash.success("Thanks for posting %s", author);
+    	Cache.delete(captchaId);
     	show(id);
+    }
+    
+    public static void captcha(String captchaId) {
+    	Images.Captcha captcha = Images.captcha();
+    	String code = captcha.getText("#E4EAFD");
+    	Cache.set(captchaId, code, "30s");
+    	System.out.println("captcha code: " + code);
+    	renderBinary(captcha);
     }
 }
