@@ -10,7 +10,13 @@ Tag(test):
  
 Tag(mvc):
     name:           MVC
-    
+
+User(scoolin):
+    email:          scoolin@gmail.com
+    password:       scoolin
+    fullname:       scoolin.Lin
+    isAdmin:        true
+        
 User(bob):
     email:          bob@gmail.com
     password:       secret
