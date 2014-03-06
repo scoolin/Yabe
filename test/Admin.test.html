@@ -1,0 +1,29 @@
+#{fixture delete:'all', load:'data.yml' /}
+
+#{selenium 'Test login'}
+ 	clearSession()
+ 	open('/login')
+    assertElementPresent('css=input[value='Log in now']')
+    
+    // Click Log in now
+    clickAndWait('css=input[type=submit]')
+    
+    // Should get an error
+    assertTextPresent('Oops, unknown username or password.')
+    type('username', 'bob@gmail.com')
+    clickAndWait('css=input[type=submit]')
+    assertTextPresent('Oops, unknown username or password.')
+    
+    // Right login
+    type('username', 'bob@gmail.com')
+    type('password', 'secret')
+    clickAndWait('css=input[type=submit]')
+
+    // Check
+    assertTextPresent('Welcome Bob')
+#{/selenium}
+
+#{selenium 'Test logout'}
+ 	open('/secure/logout')
+    assertTextPresent('Log in to write something')
+#{/selenium}

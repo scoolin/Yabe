@@ -16,6 +16,7 @@ POST	/admin/myPosts/{id}						Admin.save
 POST	/admin/new								Admin.save
 
 # Administration
+GET		/login									Secure.login
 GET		/admin/?								Admin.index
 *		/admin									module:crud
 

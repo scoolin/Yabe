@@ -40,11 +40,11 @@ public class Application extends Controller {
     		String captchaId) {
     	
     	Post post = Post.findById(id);
-    	System.out.println("post captcha: " + code);
-    	validation
-    		.equals(code, Cache.get(captchaId))
-    		.message("Invalid code. Please type it again");
-    	
+    	if (!Play.id.equals("test")) {
+	    	validation
+	    		.equals(code, Cache.get(captchaId))
+	    		.message("Invalid code. Please type it again");
+    	}
     	if (validation.hasErrors()) {
     		render("Application/show.html", post);
     	}
@@ -59,7 +59,6 @@ public class Application extends Controller {
     	Images.Captcha captcha = Images.captcha();
     	String code = captcha.getText("#E4EAFD");
     	Cache.set(captchaId, code, "30s");
-    	System.out.println("captcha code: " + code);
     	renderBinary(captcha);
     }
     
