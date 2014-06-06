@@ -1,0 +1,13 @@
+#{extends 'main_test.html' /}
+#{set title:'Home' /}
+ 
+%{
+	def page = {
+      args = new java.util.HashMap<String, Object>();
+      //args.putAll(params.allSimple());
+      args.put('page', it);
+      url = play.mvc.Router.getFullUrl('Test.index', args);
+      return url
+    }
+	out.println(page(1));
+}%

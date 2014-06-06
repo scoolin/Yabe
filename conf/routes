@@ -8,6 +8,7 @@ GET		/posts/{id}								Application.show
 *		/posts/{postId}/comments				Application.postComment
 GET		/captcha								Application.captcha
 GET		/posts/tag/{tag}						Application.listTagged
+GET		/test									Test.index
 
 # New Post
 GET		/admin/myPosts/{id}						Admin.form
